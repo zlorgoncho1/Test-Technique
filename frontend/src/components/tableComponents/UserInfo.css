@@ -1,0 +1,37 @@
+.user-info {
+    display: flex;
+    align-items: center;
+}
+img {
+    vertical-align: middle;
+}
+.user-info__img img {
+    margin-right: 15px;
+    height: 55px;
+    width: 55px;
+    border-radius: 45px;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+}
+h5{
+	font-size: 1.25rem;
+	font-family: inherit;
+    font-weight: 600;
+    line-height: 1.2;
+}
+p{
+	margin-top: 0;
+	font-size: 1.05rem;
+	margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+
+}
+.mb-0, .my-0{
+    margin-bottom: 0!important;
+}
+.text-muted {
+	margin-top: 0;
+    color: #6c757d!important;
+}
