@@ -1,8 +1,8 @@
-import './AddUserModal.css'
+import './EditUserModal.css'
 import axios from 'axios';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
-const AddUserModal = (props) => {
+const EditUserModal = (props) => {
 	const [fullname, setFullname] = useState("")
 	const [tag, setTag] = useState("")
 	const [location, setLocation] = useState("")
@@ -10,64 +10,82 @@ const AddUserModal = (props) => {
 	const [status, setStatus] = useState(false)
 	const [picture, setPicture] = useState("")
 
-	const handleStatus = () => {
-		setStatus(!status)
-	}
+	const handleStatus = () => setStatus(!status)
 	const handleFullname = e => setFullname(e.target.value)
-	const handleTag = e => setTag(e.target.value)
 	const handleLocation = e => setLocation(e.target.value)
 	const handlePhone = e => setPhone(e.target.value)
 	const handlePicture = e => setPicture(e.target.files[0])
+
+	useEffect(() => {
+	    fetch(props.userUrl).then(response => response.json()).then(data => {
+	    	setTag(data.tag)
+	    	setFullname(data.fullname)
+	    	setLocation(data.location)
+	    	setPhone(data.phone)
+	    	setStatus(data.status)
+	    })
+	}, [props.userUrl])
+	
 	const handleSubmit = e => {
 		e.preventDefault()
-		let form_data = new FormData();
-		form_data.append('fullname', fullname);
-		form_data.append('tag', tag);
-		form_data.append('location', location);
-		form_data.append('phone', phone);
-		form_data.append('status', status);
-	    form_data.append('picture', picture, picture.name);
-	    let url = 'http://localhost:8000/api/users/';
-	    axios.post(url, form_data, {
-	      headers: {
-	        'content-type': 'multipart/form-data'
-	      }
-		    })
-	        .then(res => {
-	        	setFullname("")
-				setTag("")
-				setLocation("")
-				setPhone("")
-				setStatus(false)
-				setPicture("")
+		if (picture === ""){
+			fetch(props.userUrl, {
+				method: 'PATCH',
+				body: JSON.stringify({
+					fullname: fullname,
+					tag: tag,
+					status: status,
+					location: location,
+					phone: phone,
+				}),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+			})
+			.then((response) => response.json())
+			.then((json) => {
+				props.modalToggle()
+				props.refresh()
+			});
+		}else{
+			let form_data = new FormData();
+			form_data.append('fullname', fullname);
+			form_data.append('tag', tag);
+			form_data.append('location', location);
+			form_data.append('phone', phone);
+			form_data.append('status', status);
+		    form_data.append('picture', picture, picture.name);
+		    let url = props.userUrl;
+		    axios.patch(url, form_data, {
+		      headers: {
+		        'content-type': 'multipart/form-data'
+		      }
+			    })
+		        .then(res => {
 				props.modalToggle()
 				props.refresh()
 	        })
 	        .catch(err => console.log(err))
-		  };
-
+		}
+	}
 	return(
 		<div className="overlay">
 			<form className="modal-add" onSubmit={handleSubmit}>
-				<h1 className="form-title">Add a new user</h1>
+				<h1 className="form-title">Editing @{tag}</h1>
 				<div className="form-section-container">
 					<div className="form-item-container">
 						<label htmlFor="fullname">Fullname</label>
-						<input onChange={handleFullname} value={fullname} type="text" id="fullname" placeholder="Fullname"/>
-					</div>
-					<div className="form-item-container">
-						<label htmlFor="tag">Tag</label>
-						<input onChange={handleTag} value={tag} type="text" id="tag" placeholder="@tag"/>
+						<input onChange={handleFullname} value={fullname} placeholder={fullname} type="text" id="fullname"/>
 					</div>
 				</div>
 				<div className="form-section-container">
 					<div className="form-item-container">
 						<label htmlFor="location">Location</label>
-						<input onChange={handleLocation} value={location} type="text" id="location" placeholder="Location"/>
+						<input onChange={handleLocation} value={location} placeholder={location} type="text" id="location"/>
 					</div>
 					<div className="form-item-container">
 						<label htmlFor="phone">Phone</label>
-						<input onChange={handlePhone} value={phone}type="text" id="phone" placeholder="00221 76 000 00 00"/>
+						<input onChange={handlePhone} value={phone} placeholder={phone}type="text" id="phone"/>
 					</div>
 				</div>
 				<div className="form-section-container">
@@ -82,11 +100,11 @@ const AddUserModal = (props) => {
 				</div>
 				<div className="form-section-container">
 					<button onClick={props.modalToggle} className="btn btn-primary btn-sm bg-danger">Cancel</button>
-					<button className="btn btn-primary btn-sm">Insert</button>
+					<button className="btn btn-primary btn-sm">Edit</button>
 				</div>
 			</form>
 		</div>
 	)
 }
 
-export default AddUserModal;
+export default EditUserModal;

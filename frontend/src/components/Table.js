@@ -1,11 +1,12 @@
-import {useState, useEffect} from 'react';
 import './Table.css';
 import UserItem from './tableComponents/UserItem';
 const Table = (props) => {
-	const {users, setUsers} = props
 
-	const listUsers = users.map(user => 
-		<UserItem 
+	const listUsers = props.users.map(user => 
+		<UserItem
+			refresh={props.refresh}
+			setUserUrl={props.setUserUrl}
+			setEditModal={props.setEditModal}
 			key ={user} 
 			fullname={user.fullname} 
 			tag={user.tag}
@@ -14,7 +15,9 @@ const Table = (props) => {
 			location={user.location} 
 			phone={user.phone} 
 			url={user.url}
-		/>)
+		/>
+	)
+		
 
 	return(
 		<table className="table">
