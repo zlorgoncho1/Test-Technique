@@ -12,7 +12,7 @@
     background-color: #007bff;
     border-color: #007bff;
 }
-.btn {
+.btn, input[type="file"] {
     display: inline-block;
     font-weight: 400;
     text-align: center;

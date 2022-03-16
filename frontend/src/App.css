@@ -7,10 +7,23 @@
   margin-left: auto;
 
 }
+.container > div{
+  display: flex;
+  justify-content: space-between;
+}
 h1{
   font-family: 'Roboto';
   font-style: bold;
   font-weight: 400;
   font-size: 2.5rem;
   line-height: 70px;
+}
+.btn-add {
+  width: 80px;
+  height: 40px;
+  background-color: #1DD02F;
+  color: #FFFFFF;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-right: 25px;
 }

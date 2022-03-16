@@ -2,7 +2,7 @@ import './ContactButton.css'
 
 const ContactButton = () => {
 	return(
-		<button class="btn btn-primary btn-sm">Contact</button>
+		<button className="btn btn-primary btn-sm">Contact</button>
 	)
 }
 

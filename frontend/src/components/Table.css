@@ -13,6 +13,7 @@ thead {
     border-color: inherit;
 }
 tbody {
+    position: relative;
     display: table-row-group;
     vertical-align: middle;
     border-color: inherit;

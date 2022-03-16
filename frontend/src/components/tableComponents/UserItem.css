@@ -1,0 +1,7 @@
+.table tbody tr.edit-fields td {
+	background-color: #007BFF;
+	color:  white;
+	position: absolute;
+	left: 0;
+	top: -10;
+}

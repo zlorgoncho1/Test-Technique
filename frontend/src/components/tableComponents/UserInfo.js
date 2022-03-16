@@ -1,15 +1,16 @@
 import './UserInfo.css';
 import user from './user.jpg';
 
-const UserInfo = () => {
+const UserInfo = (props) => {
+	const {fullname, picture, tag} = props
 	return(
-		<div class="user-info">
-			<div class="user-info__img">
-				<img src={user} alt="User Img"/>
+		<div className="user-info">
+			<div className="user-info__img">
+				<img src={picture} alt="profile"/>
 			</div>
-			<div class="user-info__basic">
-				<h5 class="mb-0">Kiran Acharya</h5>
-				<p class="text-muted mb-0">@kiranacharyaa</p>
+			<div className="user-info__basic">
+				<h5 className="mb-0">{fullname}</h5>
+				<p className="text-muted mb-0">@{tag}</p>
 			</div>
 		</div>
 	)

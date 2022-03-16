@@ -1,10 +1,23 @@
+import {useState, useEffect} from 'react';
 import './Table.css';
-import UserInfo from './tableComponents/UserInfo';
-import ContactButton from './tableComponents/ContactButton';
-import Dropdown from './tableComponents/Dropdown';
-const Table = () => {
+import UserItem from './tableComponents/UserItem';
+const Table = (props) => {
+	const {users, setUsers} = props
+
+	const listUsers = users.map(user => 
+		<UserItem 
+			key ={user} 
+			fullname={user.fullname} 
+			tag={user.tag}
+			picture={user.picture}
+			status={user.status} 
+			location={user.location} 
+			phone={user.phone} 
+			url={user.url}
+		/>)
+
 	return(
-		<table class="table">
+		<table className="table">
 			<thead>
 				<tr>
 					<th>User</th>
@@ -16,30 +29,7 @@ const Table = () => {
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td><UserInfo/></td>
-					<td><span class="active-circle bg-success"></span> Active</td>
-					<td>Bangalore</td>
-					<td>+91 9876543215</td>
-					<td><ContactButton/></td>
-					<td><Dropdown/></td>
-				</tr>
-				<tr>
-					<td><UserInfo/></td>
-					<td><span class="active-circle bg-danger"></span> Inactive</td>
-					<td>Bangalore</td>
-					<td>+91 9876543215</td>
-					<td><ContactButton/></td>
-					<td><Dropdown/></td>
-				</tr>
-				<tr>
-					<td><UserInfo/></td>
-					<td><span class="active-circle bg-success"></span> Active</td>
-					<td>Bangalore</td>
-					<td>+91 9876543215</td>
-					<td><ContactButton/></td>
-					<td><Dropdown/></td>
-				</tr>
+				{listUsers}
 			</tbody>
 		</table>
 	)

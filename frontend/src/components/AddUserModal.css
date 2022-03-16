@@ -1,0 +1,53 @@
+.overlay{
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(49, 49, 49, 0.8);
+}
+.form-title{
+	text-align: center;
+}
+.modal-add{
+	position: absolute;
+	width: 600px;
+	height: 500px;
+	top: 10%;
+	left: 25%;
+	padding: 2%;
+	background-color: #fff;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	border-radius: 6px;
+}
+.form-section-container{
+	display: flex;
+	justify-content: space-around;
+}
+.form-item-container{
+	width: 40%;
+	display: flex;
+	flex-direction: column;
+}
+.form-item-container-last{
+	width: 20%;
+	display: flex;
+	align-items: center;
+	vertical-align: center;
+	justify-content: space-between;
+}
+label{
+	margin-left: 1vw;
+}
+input[type='text']{
+	outline: none;
+	height: 5.2vh;
+	width: 100%;
+	padding: 5%;
+}
+.overlay button{
+	width: 20%;
+	height: 40px;
+}
